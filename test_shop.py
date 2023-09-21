@@ -43,7 +43,7 @@ class TestProducts:
 
     def test_product_buy_more_than_available(self, product_ended):
         with pytest.raises(ValueError):
-            assert product_ended.buy(2) is ValueError
+            product_ended.buy(2)
 
 
 class TestCart:
@@ -54,8 +54,7 @@ class TestCart:
 
     def test_add_product_with_zero_count(self, cart, product_book):
         with pytest.raises(ValueError):
-            assert cart.add_product(product_book, 0) is ValueError
-            assert cart == {}
+            cart.add_product(product_book, 0)
 
     def test_remove_product(self, cart, product_book):
         cart.add_product(product_book, 5)
@@ -80,7 +79,7 @@ class TestCart:
 
     def test_remove_product_not_in_cart(self, cart, product_book):
         with pytest.raises(NameError):
-            assert cart.remove_product(product_book, 5) is NameError
+            cart.remove_product(product_book, 5)
 
     def test_clear(self, cart, product_book, product_pen):
         cart.add_product(product_book)
@@ -109,5 +108,4 @@ class TestCart:
         cart.add_product(product_pen, 126)
         product_pen.buy(100)
         with pytest.raises(ValueError):
-            assert cart.buy() is ValueError
-            assert product_pen not in cart.products
+            cart.buy()
